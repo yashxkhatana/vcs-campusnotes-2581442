@@ -15,3 +15,8 @@ function renderNotes(list) {
 }
 
 renderNotes(notes);
+
+function searchNotes(query) {
+  const q = query.toLowerCase();
+  return notes.filter((n) => n.title.toLowerCase().includes(q) || n.subject.toLowerCase().includes(q));
+}
