@@ -6,6 +6,7 @@ const notes = [
 
 function renderNotes(list) {
   const ul = document.getElementById("notes");
+  document.getElementById("note-count").textContent = `${list.length} notes shared`;
   ul.innerHTML = "";
   for (const note of list) {
     const li = document.createElement("li");
