@@ -10,3 +10,11 @@ A small web app where IILM CSE students share and find lecture notes.
 ## How to run
 
 Open index.html in any browser. No build step needed.
+
+## Project structure
+
+| File | Purpose |
+|---|---|
+| `index.html` | Homepage that lists shared notes |
+| `style.css` | Base styles |
+| `notes.js` | Notes data and rendering logic |
