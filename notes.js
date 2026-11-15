@@ -13,10 +13,14 @@ function renderNotes(list) {
     return;
   }
   for (const note of list) {
-    const li = document.createElement("li");
-    li.textContent = `${note.subject}: ${note.title}`;
-    ul.appendChild(li);
+    ul.appendChild(createNoteItem(note));
   }
+}
+
+function createNoteItem(note) {
+  const li = document.createElement("li");
+  li.textContent = `${note.subject}: ${note.title}`;
+  return li;
 }
 
 renderNotes(notes);
