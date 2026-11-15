@@ -1,0 +1,18 @@
+#!/bin/sh
+# commit-msg: reject messages shorter than 10 characters
+# or not starting with feat:, fix:, docs:, refactor: or chore:
+# $1 is the path to the file holding the proposed commit message.
+
+msg=$(head -n 1 "$1")
+len=$(printf '%s' "$msg" | wc -m | tr -d ' ')
+
+if [ "$len" -lt 10 ]; then
+  echo "commit-msg: message \"$msg\" is $len characters; it must be at least 10."
+  exit 1
+fi
+
+if ! printf '%s' "$msg" | grep -qE '^(feat|fix|docs|refactor|chore): '; then
+  echo "commit-msg: message \"$msg\" must start with feat:, fix:, docs:, refactor: or chore:"
+  exit 1
+fi
+exit 0

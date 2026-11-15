@@ -1,0 +1,20 @@
+#!/bin/sh
+# pre-commit: reject the commit if any staged file contains TODO or FIXME.
+# Checks the staged (index) version of each added/copied/modified file.
+# The .githooks folder itself is skipped so this script can be committed.
+
+found=0
+for file in $(git diff --cached --name-only --diff-filter=ACM -- . ':!.githooks'); do
+  matches=$(git show ":$file" | grep -nE 'TODO|FIXME')
+  if [ -n "$matches" ]; then
+    echo "pre-commit: $file contains TODO/FIXME:"
+    echo "$matches" | sed 's/^/    line /'
+    found=1
+  fi
+done
+
+if [ "$found" -eq 1 ]; then
+  echo "pre-commit: commit rejected. Resolve or remove the TODO/FIXME notes first."
+  exit 1
+fi
+exit 0
